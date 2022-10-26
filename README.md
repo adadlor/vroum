@@ -1,5 +1,6 @@
 # Vroum
 
+## EQUIPE ; Lomy Team
 
 
 ## Getting started
