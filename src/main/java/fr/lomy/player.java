@@ -12,6 +12,24 @@ public class player {
     private Integer priorite;// pour l'ordre de jeu
     private Integer x;
     private Integer y;
+
+    public player(Integer priorite, Integer x, Integer y) {
+        this.priorite = priorite;
+        this.x = x;
+        this.y = y;
+    }
+
+    public void setPriorite(Integer priorite) {
+        this.priorite = priorite;
+    }
+
+    public void setX(Integer x) {
+        this.x = x;
+    }
+
+    public void setY(Integer y) {
+        this.y = y;
+    }
     
     public ArrayList<Integer> getPosition(){
         ArrayList<Integer> p = new ArrayList<Integer>();
