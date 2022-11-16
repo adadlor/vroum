@@ -1,4 +1,4 @@
-package src;
+package fr.lomy.Require;
 
 
 import java.awt.BorderLayout;

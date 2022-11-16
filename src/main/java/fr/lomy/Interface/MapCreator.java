@@ -1,4 +1,4 @@
-package fr.lomy.Map;
+package fr.lomy.Interface;
 
 import javax.swing.*;
 import java.awt.*;
