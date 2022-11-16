@@ -30,8 +30,7 @@ public class circuit {
     }
 
     public void setHorsPiste(ArrayList<ArrayList<Integer>> horsPiste) {
-        this.horsPiste = horsPiste;
-    }
+        this.horsPiste = horsPiste;}
     
     
     
