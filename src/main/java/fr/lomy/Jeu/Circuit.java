@@ -1,18 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package com.mycompany.lomy;
+package fr.lomy.Jeu;
 import java.util.ArrayList;
-/**
- *
- * @author valentinwendling
- */
-public class circuit {
+
+public class Circuit {
     private ArrayList<ArrayList<Integer>> piste;
     private ArrayList<ArrayList<Integer>> horsPiste;
 
-    public circuit(ArrayList<ArrayList<Integer>> piste, ArrayList<ArrayList<Integer>> horsPiste) {
+    public Circuit(ArrayList<ArrayList<Integer>> piste, ArrayList<ArrayList<Integer>> horsPiste) {
         this.piste = piste;
         this.horsPiste = horsPiste;
     }

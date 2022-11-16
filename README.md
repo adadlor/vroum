@@ -1,5 +1,16 @@
 # LOMY TEAM : Projet Vroom -> État WIP
 
+## Requis
+
+Fonctionne avec Maven & Java 18 /!\ Seulement Java 18 /!\
+- [ ] Installer Java 18 
+- [ ] Installer Maven
+
+### Alternative
+Vous pouvez utiliser intellij pour lancer le projet. 
+Tout se configure automatiquement.
+
+
 ## But du jeu 
 Imaginez une course de voiture électique en usant de statégie pour parvenir en premier à la ligne de départ ! Comprenez et apprennez sur le développement durable en répondant au questions et débloquez de nouvelles voitures stylées.
 
