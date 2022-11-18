@@ -11,7 +11,7 @@ import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class Main extends GameApplication {
     public static void main(String[] args) {
-        System.out.println("Vroum Vroum");
+        System.out.println("Vroum Vroum Test");
         launch(args);
     }
 
