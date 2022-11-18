@@ -21,6 +21,7 @@ public class Main extends GameApplication {
         gameSettings.setHeight(600);
         gameSettings.setTitle("Vroum Vroum");
         gameSettings.setVersion("SC 0.1");
+        gameSettings.setMainMenuEnabled(true);
     }
 
     @Override
@@ -33,5 +34,10 @@ public class Main extends GameApplication {
     @Override
     protected void initInput() {
         onKeyDown(KeyCode.F, () -> getNotificationService().pushNotification("Hello World!"));
+
+        onKeyDown(KeyCode.F1, "Show Rules", () -> {
+            getDialogService().showMessageBox("Rules");
+        });
     }
+
 }
