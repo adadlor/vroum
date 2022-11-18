@@ -3,6 +3,7 @@ package fr.lomy.vroum;
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.core.math.FXGLMath;
+import fr.lomy.vroum.Interface.InterfaceImplement;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.input.KeyCode;
 import javafx.util.Duration;
@@ -10,18 +11,24 @@ import javafx.util.Duration;
 import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class Main extends GameApplication {
+
+    public static final int WIDTH = 800;
+    public static final int HEIGHT = 600;
+
+
     public static void main(String[] args) {
-        System.out.println("Vroum Vroum Test");
+        System.out.println("Vroum Vroum");
         launch(args);
     }
 
     @Override
     protected void initSettings(GameSettings gameSettings) {
-        gameSettings.setWidth(800);
-        gameSettings.setHeight(600);
+        gameSettings.setWidth(WIDTH);
+        gameSettings.setHeight(HEIGHT);
         gameSettings.setTitle("Vroum Vroum");
         gameSettings.setVersion("SC 0.1");
         gameSettings.setMainMenuEnabled(true);
+        gameSettings.setSceneFactory(new InterfaceImplement());
     }
 
     @Override
@@ -39,5 +46,6 @@ public class Main extends GameApplication {
             getDialogService().showMessageBox("Rules");
         });
     }
+
 
 }
