@@ -28,18 +28,6 @@ public class Main extends GameApplication {
         System.out.println("initGame");
         getGameWorld().addEntityFactory(new SimpleFactory());
 
-        run(() -> {
-            spawn("enemy", FXGLMath.randomPoint(
-                    new Rectangle2D(0, 0, getAppWidth(), getAppHeight())
-            ));
-            spawn("ally", FXGLMath.randomPoint(
-                    new Rectangle2D(0, 0, getAppWidth(), getAppHeight())
-            ));
-        }, Duration.seconds(1));
-
-        spawn("enemy", 100, 100);
-
-        spawn("ally", 600, 100);
     }
 
     @Override
