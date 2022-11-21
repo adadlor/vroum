@@ -2,8 +2,8 @@
 
 ## Requis
 
-Fonctionne avec Maven & Java 18 /!\ Seulement Java 18 /!\
-- [ ] Installer Java 18 
+Fonctionne avec Maven & Java 19
+- [ ] Installer Java 19 
 - [ ] Installer Maven
 
 ### Alternative

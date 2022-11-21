@@ -3,6 +3,9 @@ package fr.lomy.vroum;
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.core.math.FXGLMath;
+import com.almasb.fxgl.entity.Entity;
+import fr.lomy.vroum.Componant.Circuit;
+import fr.lomy.vroum.Componant.StartPoint;
 import fr.lomy.vroum.Factory.MapCreatorFactory;
 import fr.lomy.vroum.Interface.InterfaceImplement;
 import fr.lomy.vroum.Interface.MapCreatorInterface;
@@ -13,6 +16,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.util.Duration;
 
+import java.util.ArrayList;
+
 import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class Main extends GameApplication {
@@ -20,6 +25,8 @@ public class Main extends GameApplication {
     public static final int WIDTH = 800; // Largeur de la fenêtre
     public static final int HEIGHT = 600; // Hauteur de la fenêtre
     private static int LevelType = 0; // Type de niveau (1 = jeu, 2 = map creator)
+
+    private Circuit circuit;
 
 
     public static void main(String[] args) {
@@ -36,6 +43,12 @@ public class Main extends GameApplication {
         gameSettings.setVersion("SC 0.1");
         gameSettings.setMainMenuEnabled(true);
         gameSettings.setSceneFactory(new InterfaceImplement());
+
+        /*
+        Import CSS
+         */
+        gameSettings.getCSSList().add("MapCreator.css");
+
     }
 
     @Override
@@ -43,10 +56,10 @@ public class Main extends GameApplication {
         Tools.debug_print("initGame : LevelType = " + LevelType);
         switch (LevelType) {
             case 1:
-                gamestart();
+                new Game();
                 break;
             case 2:
-                mapcreator();
+                new MapCreator();
                 break;
             default:
                 Tools.error_print("initGame : LevelType = " + LevelType + " is not a valid LevelType");
@@ -72,10 +85,43 @@ public class Main extends GameApplication {
 
         //Mouse input
         onBtnDown(MouseButton.PRIMARY, () -> {
-            if (LevelType == 2) {
-                getGameWorld().spawn("Route", getInput().getMousePositionWorld());
+            switch (LevelType){
+                case 1:
+                    // For the game
+                    break;
+                case 2:
+                    // For MapCreator
+                    var coords = getInput().getMousePositionWorld();
+                    var x = coords.getX();
+                    var y = coords.getY();
+                    switch (MapCreator.getActionType()) {
+                        case 0:
+                            // Centrage du placement
+                            x = x -((int)(StartPoint.getSTARTPOINT_SIZEY()/2));
+                            y = y -((int)(StartPoint.getSTARTPOINT_SIZEY()/2));
+
+                            if (circuit == null) {
+                                circuit = new Circuit(x, y);
+                            } else {
+                                circuit.update(x, y);
+                            }
+
+                            MapCreatorInterface.setStartPlaced(true);
+                            break;
+                        case 1:
+                            //entities.add(spawn("Road", x, y));
+                            break;
+                        default:
+                            Tools.error_print("initInput : MapCreator.getActionType() = " + MapCreator.getActionType() + " is not a valid actionType");
+                            break;
+                    }
+                    break;
+                default:
+                    Tools.error_print("initInput : LevelType = " + LevelType + " is not a valid LevelType");
+                    break;
             }
         });
+
 
     }
 
@@ -83,23 +129,6 @@ public class Main extends GameApplication {
         LevelType = levelType;
     }
 
-    /**
-     * Fonction qui permet de lancer le jeu
-     */
-    private void gamestart(){
-        getGameWorld().addEntityFactory(new SimpleFactory());
-    }
 
-    /**
-     * Fonction qui permet de lancer le map creator
-     */
-    private void mapcreator(){
-
-        getGameWorld().addEntityFactory(new MapCreatorFactory());
-        spawn("Floor", 0, 0);
-
-        var interfaceMapCreator = new MapCreatorInterface();
-        addUINode(interfaceMapCreator, 0,Main.HEIGHT - 100);
-    }
 
 }

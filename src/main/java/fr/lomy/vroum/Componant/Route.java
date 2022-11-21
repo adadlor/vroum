@@ -6,6 +6,9 @@ public abstract class Route {
     protected String textureName;
     protected String name;
 
+    private double x;
+    private double y;
+
     public Route() {}
 
 
@@ -17,4 +20,8 @@ public abstract class Route {
         return name;
     }
 
+    public void update(double x, double y) {
+        this.x = x;
+        this.y = y;
+    }
 }
