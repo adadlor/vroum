@@ -30,6 +30,9 @@ public class StartPoint extends Component {
         this.y = y;
     }
 
+    /**
+     * Ajoute les flèches pour ajouter des routes
+     */
     private void addAction(){
         Tools.debug_print("StartPoint | addAction");
         upArrow = FXGL.texture("arrow.png").multiplyColor(Color.RED);
@@ -41,6 +44,11 @@ public class StartPoint extends Component {
         FXGL.getGameScene().addUINodes(upArrow, downArrow);
     }
 
+    /**
+     * Met à jour la position du point de départ
+     * @param x
+     * @param y
+     */
     public void update(double x, double y){
         Tools.debug_print("StartPoint | update");
         this.x = x;
@@ -54,6 +62,12 @@ public class StartPoint extends Component {
 
     }
 
+    /**
+     * Associe les Textures des fleche à l'instance de StartPoint
+     * TODO: A modifier pour que les flèches soient directement dans le StartPoint
+     * @param upArrow
+     * @param downArrow
+     */
     public void asignAction(Texture upArrow, Texture downArrow){
         Tools.debug_print("StartPoint | asignAction");
         this.upArrow = upArrow;

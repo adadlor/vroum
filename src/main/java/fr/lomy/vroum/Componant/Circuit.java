@@ -23,18 +23,24 @@ public class Circuit extends Component {
     private int STARTPOINT_SIZEX = startPoint.getSTARTPOINT_SIZEX();
     private int STARTPOINT_SIZEY = startPoint.getSTARTPOINT_SIZEY();
 
-
     private HashMap<Integer, Entity> routes;
 
     public Circuit(double start_x, double start_y) {
         routes = new HashMap<>();
-
-        spEntity=FXGL.spawn("StartPoint", start_x, start_y);
-        startPoint = spEntity.getComponent(StartPoint.class);
-        addAction();
-        startPoint.asignAction(upArrow, downArrow);
+        spEntity=FXGL.spawn("StartPoint", start_x, start_y); // Creation de l'entité StartPoint (Correspond à la position de départ du circuit)
+        startPoint = spEntity.getComponent(StartPoint.class); // Récupération du composant StartPoint de l'entité
+        /*
+         TODO: A modifier: Mettre les actions dans le composant StartPoint
+         */
+        addAction(); // Ajout des flèches
+        startPoint.asignAction(upArrow, downArrow); // Affectation des flèches au composant StartPoint
     }
 
+    /**
+     * Actualisation de la position du circuit et des routes qui le compose.
+     * @param x
+     * @param y
+     */
     public void update(double x, double y) {
         startPoint.update(x, y);
         spEntity.setPosition(x, y);
@@ -43,6 +49,9 @@ public class Circuit extends Component {
         }
     }
 
+    /**
+     * Ajout des flèches action.
+     */
     private void addAction() {
         if (routes.size() == 0) {
             // Le circuit n'a pas encore de route donc c'est le point de départ
@@ -77,6 +86,12 @@ public class Circuit extends Component {
         }
     }
 
+    /**
+     * Ajout d'une route au circuit.
+     * @param x
+     * @param y
+     * @param direction
+     */
     private void addRoad(double x, double y, String direction) {
         Tools.debug_print("Circuit | addRoad");
         routes.put(routes.size(), FXGL.spawn("Road", x, y));

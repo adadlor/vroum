@@ -28,9 +28,13 @@ public class MapCreatorInterface extends Parent {
         return startPlaced;
     }
 
+    /**
+     * Change startPlaced qui permet de savoir si le point de départ a été placé
+     * @param startPlaced
+     */
     public static void setStartPlaced(Boolean startPlaced) {
         MapCreatorInterface.startPlaced = startPlaced;
-        roadButton.setDisable(!startPlaced);
+        roadButton.setDisable(!startPlaced); // Si le start est placé, on peut placer des routes
 
     }
 
@@ -44,7 +48,7 @@ public class MapCreatorInterface extends Parent {
 
     public MapCreatorInterface() {
         bg = new Rectangle(Main.WIDTH, Main.HEIGHT);
-        bg.setFill(Color.rgb(66, 66, 66, 1));
+        bg.setFill(Color.rgb(66, 66, 66, 1)); // Change la couleur de fond
 
         startButton = new Button("Ligne de départ");
         startButton.setTranslateX(10);
@@ -53,14 +57,14 @@ public class MapCreatorInterface extends Parent {
         roadButton = new Button("Ajouter une route");
         roadButton.setTranslateX(10);
         roadButton.setTranslateY(60);
-        roadButton.disableProperty().set(!startPlaced);
+        roadButton.disableProperty().set(!startPlaced); // Bouton désactivé si pas de départ
 
         startButton.setOnAction(e -> {
-            MapCreator.setActionType(0);
+            MapCreator.setActionType(0); // Change le type d'action à "ajouter une ligne de départ"
         });
 
         roadButton.setOnAction(e -> {
-            MapCreator.setActionType(1);
+            MapCreator.setActionType(1); // Change le type d'action à "ajouter une route"
         });
 
 

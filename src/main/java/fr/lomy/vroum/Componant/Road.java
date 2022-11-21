@@ -29,12 +29,21 @@ public class Road extends Component {
         this.y = y;
     }
 
+    /**
+     * Pas encore implémenté.
+     * @param x
+     * @param y
+     */
     public void update(double x, double y){
         Tools.debug_print("Road | update");
         this.x = x;
         this.y = y;
     }
 
+    /**
+     * Ajoute les flèches d'actions en fonction de la direction de la route.
+     * @param side
+     */
     public void addAction(String side){
         Tools.debug_print("Road | addAction");
         switch (side){

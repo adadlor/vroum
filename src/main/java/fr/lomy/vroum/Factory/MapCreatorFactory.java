@@ -16,7 +16,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
+/**
+ * Permet de créer les entités pour le MapCreator
+ */
 public class MapCreatorFactory implements EntityFactory {
+
+
     public MapCreatorFactory() {
         Tools.debug_print("MapCreatorFactory");
     }

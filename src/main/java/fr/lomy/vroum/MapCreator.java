@@ -5,6 +5,9 @@ import fr.lomy.vroum.Interface.MapCreatorInterface;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
 
+/**
+ * Classe principale du MapCreator
+ */
 public class MapCreator {
 
     /*
