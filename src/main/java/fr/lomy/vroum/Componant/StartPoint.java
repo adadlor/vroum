@@ -6,6 +6,7 @@ import com.almasb.fxgl.texture.Texture;
 import fr.lomy.vroum.Tools.Tools;
 import javafx.scene.paint.Color;
 
+
 public class StartPoint extends Component {
 
 

@@ -6,6 +6,7 @@ import com.almasb.fxgl.entity.EntityFactory;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.Spawns;
 import com.almasb.fxgl.texture.Texture;
+import fr.lomy.vroum.Componant.Road;
 import fr.lomy.vroum.Componant.StartPoint;
 import fr.lomy.vroum.Enums.EntityTypes;
 import fr.lomy.vroum.Main;
@@ -25,6 +26,7 @@ public class MapCreatorFactory implements EntityFactory {
         return FXGL.entityBuilder(data)
                 .type(EntityTypes.ROAD)
                 .view(new Rectangle(25, 50, Color.DARKGRAY))
+                .with(new Road(data.getX(), data.getY()))
                 .build();
     }
 

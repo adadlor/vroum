@@ -2,7 +2,7 @@ package fr.lomy.vroum.Interface.MapCreator;
 
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.texture.Texture;
-import fr.lomy.vroum.Componant.Route;
+import fr.lomy.vroum.Componant.Road;
 import javafx.geometry.Pos;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -11,9 +11,9 @@ import javafx.scene.shape.Rectangle;
 
 public class RoadIcon extends VBox {
     private Texture texture;
-    private Route route;
+    private Road route;
 
-    public RoadIcon(Route route) {
+    public RoadIcon(Road route) {
         this.route = route;
         this.texture = FXGL.texture(route.getTextureName());
 

@@ -4,7 +4,6 @@ import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.texture.Texture;
-import fr.lomy.vroum.Main;
 import fr.lomy.vroum.Tools.Tools;
 import javafx.scene.paint.Color;
 
@@ -25,7 +24,7 @@ public class Circuit extends Component {
     private int STARTPOINT_SIZEY = startPoint.getSTARTPOINT_SIZEY();
 
 
-    private HashMap<Integer, Route> routes;
+    private HashMap<Integer, Entity> routes;
 
     public Circuit(double start_x, double start_y) {
         routes = new HashMap<>();
@@ -38,8 +37,9 @@ public class Circuit extends Component {
 
     public void update(double x, double y) {
         startPoint.update(x, y);
-        for (Route route : routes.values()) {
-            route.update(x, y);
+        spEntity.setPosition(x, y);
+        for (int i = 0; i < routes.size(); i++) {
+            routes.get(i).setPosition(x, y);
         }
     }
 
@@ -63,13 +63,13 @@ public class Circuit extends Component {
 
             upArrow.onMouseClickedProperty().setValue(e -> {
                 Tools.debug_print("StartPoint | upArrow | mouseClicked");
-                addRoad(x + STARTPOINT_SIZEX/4, y-STARTPOINT_SIZEY);
+                addRoad(startPoint.getX() + STARTPOINT_SIZEX/4, startPoint.getY()-STARTPOINT_SIZEY*2, "up");
                 upArrow.visibleProperty().setValue(false);
             });
 
             downArrow.onMouseClickedProperty().setValue(e -> {
                 Tools.debug_print("StartPoint | downArrow | mouseClicked");
-                addRoad(x + STARTPOINT_SIZEX/4, y + STARTPOINT_SIZEY);
+                addRoad(startPoint.getX() + STARTPOINT_SIZEX/4, startPoint.getY() + STARTPOINT_SIZEY, "down");
                 downArrow.visibleProperty().setValue(false);
             });
 
@@ -77,8 +77,10 @@ public class Circuit extends Component {
         }
     }
 
-    private void addRoad(double x, double y) {
+    private void addRoad(double x, double y, String direction) {
         Tools.debug_print("Circuit | addRoad");
-        FXGL.spawn("Road", x, y);
+        routes.put(routes.size(), FXGL.spawn("Road", x, y));
+        var road = routes.get(routes.size()-1).getComponent(Road.class);
+        road.addAction(direction);
     }
 }
