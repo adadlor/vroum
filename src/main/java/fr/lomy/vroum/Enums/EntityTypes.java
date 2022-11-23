@@ -3,5 +3,5 @@ package fr.lomy.vroum.Enums;
 public enum EntityTypes {
     PLAYER,
     CAR,
-    FLOOR, STARTPOINT, ROAD,
+    FLOOR, STARTPOINT, ROAD, MAP, CHOICE,
 }

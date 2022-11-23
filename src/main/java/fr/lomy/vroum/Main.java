@@ -84,6 +84,7 @@ public class Main extends GameApplication {
         });
 
         //Mouse input
+        /*
         onBtnDown(MouseButton.PRIMARY, () -> {
             switch (LevelType){
                 case 1:
@@ -122,6 +123,8 @@ public class Main extends GameApplication {
             }
         });
 
+
+         */
 
     }
 
