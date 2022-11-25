@@ -2,6 +2,7 @@ package fr.lomy.vroum;
 
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
+import com.almasb.fxgl.entity.level.Level;
 import fr.lomy.vroum.Componant.Car;
 import fr.lomy.vroum.Data.PointData;
 import fr.lomy.vroum.Factory.GameFactory;
@@ -18,7 +19,6 @@ public class Game {
         getGameWorld().addEntityFactory(new GameFactory());
         spawn("Map", 0, 0);
         var car = spawn("Car", 100, 100);
-
 
 
         FXGL.onBtnDown(MouseButton.PRIMARY, () -> {

@@ -34,7 +34,9 @@ public class GameFactory implements EntityFactory {
     public Entity newMap(SpawnData data){
         return FXGL.entityBuilder(data)
                 .type(EntityTypes.MAP)
-                .view(new Rectangle(Main.WIDTH, Main.HEIGHT, Color.GREEN))
+                //.view(new Rectangle(Main.WIDTH, Main.HEIGHT, Color.GREEN))
+                .view("maps/Carte.png")
+
                 .build();
     }
 

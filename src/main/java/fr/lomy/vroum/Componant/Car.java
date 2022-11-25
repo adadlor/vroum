@@ -21,8 +21,8 @@ public class Car extends Component {
 
     private ArrayList<Entity> actions = new ArrayList<>();
 
-
-    private ArrayList<Integer> speed = new ArrayList<>() {{
+    private int speed = 0;
+    private ArrayList<Integer> speedVector = new ArrayList<>() {{
         add(0); // offsetX
         add(0); // offsetY
     }};
@@ -31,48 +31,48 @@ public class Car extends Component {
     public Car(Double x, Double y, Color color) {
         Tools.info_print("Creation d'une voiture");
         this.color = color;
-        this.x = x;
-        this.y = y;
-        this.xCenter = x + (FXGL.texture("cars/pitstop_car_1.png").getWidth()*0.07)/2;
-        this.yCenter = y + (FXGL.texture("cars/pitstop_car_1.png").getHeight()*0.07)/2;
-        addAction(this.speed);
+        this.x = x; // X en 0 0 de l'image
+        this.y = y; // Y en 0 0 de l'image
+        this.xCenter = x + (FXGL.texture("cars/pitstop_car_1.png").getWidth()*0.07)/2; // X du centre de l'image 0.07 = scale
+        this.yCenter = y + (FXGL.texture("cars/pitstop_car_1.png").getHeight()*0.07)/2; // Y du centre de l'image 0.07 = scale
+        addAction(this.speedVector);
     }
 
-    public void addAction(ArrayList<Integer> speed){
+    public void addAction(ArrayList<Integer> speedVector){
         // Draw a box around the car with black points
         // 3x3
-        Tools.debug_print("Add action speed: offX: " + speed.get(0) + " offY: " + speed.get(1));
-        for (int i = -1; i <= 1; i++) {
-            for (int j = -1; j <= 1; j++) {
+        Tools.debug_print("Add action speed: offX: " + speedVector.get(0) + " offY: " + speedVector.get(1));
+        for (int i = -1; i <= 1; i++) { // x
+            for (int j = -1; j <= 1; j++) { // y
 
-                var x = (this.xCenter + i * 50)+1*speed.get(0);
-                var y = (this.yCenter + j * 50)+1*speed.get(1);
+                var x = (this.xCenter + i * 50)+speedVector.get(0) *50; // coordonnée x du point
+                var y = (this.yCenter + j * 50)+speedVector.get(1) *50; // coordonnée y du point
                 Tools.debug_print("Add action x: " + x + " y: " + y);
-                var point = FXGL.spawn("Choice", x, y);
-                point.getComponent(PointData.class).setSpeed(speed.get(0)+i, speed.get(1)+j);
-                actions.add(point);
+                var point = FXGL.spawn("Choice", x, y); // spawn du point
+                point.getComponent(PointData.class).setSpeed(i, j); // set de la vitesse du point
+                actions.add(point); // ajout du point dans la liste des points
 
             }
         }
     }
 
-    public void move(ArrayList<Integer> speed){
+    public void move(ArrayList<Integer> speedVector){
         for (Entity action : actions) {
-            action.removeFromWorld();
+            action.removeFromWorld(); // suppression des points
         }
 
         Tools.error_print("CP : 1");
 
-        this.speed = speed;
-        this.xCenter += speed.get(0) * 50;
-        this.yCenter += speed.get(1) * 50;
+        this.speedVector = speedVector; // set de la nouvelle vitesse
+        this.xCenter += speedVector.get(0) * 50; // set de la nouvelle position x
+        this.yCenter += speedVector.get(1) * 50; // set de la nouvelle position y
         Tools.error_print("CP : 2");
-        entity.translateX(speed.get(0) * 50);
-        entity.translateY(speed.get(1) * 50);
+        entity.translateX(speedVector.get(0) * 50); // déplacement de la voiture
+        entity.translateY(speedVector.get(1) * 50); // déplacement de la voiture
         Tools.error_print("CP : 3");
 
         actions = new ArrayList<>();
-        addAction(speed);
+        addAction(speedVector); // ajout des nouveaux points
     }
 
 
@@ -81,6 +81,6 @@ public class Car extends Component {
     }
 
     public ArrayList<Integer> getSpeed() {
-        return speed;
+        return speedVector;
     }
 }
