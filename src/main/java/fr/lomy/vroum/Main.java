@@ -22,8 +22,8 @@ import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class Main extends GameApplication {
 
-    public static final int WIDTH = 704; // Largeur de la fenêtre
-    public static final int HEIGHT = 1088; // Hauteur de la fenêtre
+    public static final int WIDTH = 1000; // Largeur de la fenêtre
+    public static final int HEIGHT = 800; // Hauteur de la fenêtre
     private static int LevelType = 0; // Type de niveau (1 = jeu, 2 = map creator)
 
     private Circuit circuit;

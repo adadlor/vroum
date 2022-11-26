@@ -21,12 +21,13 @@ public class GameFactory implements EntityFactory {
 
     @Spawns("Car")
     public Entity newCar(SpawnData data) {
+        Double size = 0.03;
         return FXGL.entityBuilder(data)
                 .type(EntityTypes.CAR)
                 .viewWithBBox("cars/pitstop_car_1.png")
                 .with(new Car(data.getX(),data.getY(),Color.RED))
-                .scale(0.07 , 0.07)
-                .scaleOrigin(0.07 , 0.07)
+                .scale(size , size)
+                .scaleOrigin(size , size)
                 .build();
     }
 
@@ -35,7 +36,7 @@ public class GameFactory implements EntityFactory {
         return FXGL.entityBuilder(data)
                 .type(EntityTypes.MAP)
                 //.view(new Rectangle(Main.WIDTH, Main.HEIGHT, Color.GREEN))
-                .view("maps/Carte.png")
+                .view("maps/Carte2.png")
 
                 .build();
     }

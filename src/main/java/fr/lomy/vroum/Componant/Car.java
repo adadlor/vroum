@@ -33,8 +33,8 @@ public class Car extends Component {
         this.color = color;
         this.x = x; // X en 0 0 de l'image
         this.y = y; // Y en 0 0 de l'image
-        this.xCenter = x + (FXGL.texture("cars/pitstop_car_1.png").getWidth()*0.07)/2; // X du centre de l'image 0.07 = scale
-        this.yCenter = y + (FXGL.texture("cars/pitstop_car_1.png").getHeight()*0.07)/2; // Y du centre de l'image 0.07 = scale
+        this.xCenter = x + (FXGL.texture("cars/pitstop_car_1.png").getWidth()*0.03)/2; // X du centre de l'image 0.07 = scale
+        this.yCenter = y + (FXGL.texture("cars/pitstop_car_1.png").getHeight()*0.03)/2; // Y du centre de l'image 0.07 = scale
         addAction(this.speedVector);
     }
 
