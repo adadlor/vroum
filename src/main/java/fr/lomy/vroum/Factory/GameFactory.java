@@ -21,32 +21,30 @@ public class GameFactory implements EntityFactory {
 
     @Spawns("Car")
     public Entity newCar(SpawnData data) {
-        Double size = 0.03;
-        return FXGL.entityBuilder(data)
-                .type(EntityTypes.CAR)
-                .viewWithBBox("cars/pitstop_car_1.png")
-                .with(new Car(data.getX(),data.getY(),Color.RED))
-                .scale(size , size)
-                .scaleOrigin(size , size)
+        Double size = 0.03; // Taille de la voiture
+        return FXGL.entityBuilder(data) // Création de l'entité
+                .type(EntityTypes.CAR) // Définition du type de l'entité
+                .viewWithBBox("cars/pitstop_car_1.png") // Définition de l'image de l'entité
+                .with(new Car(data.getX(),data.getY(),Color.RED)) // Définition des composants de l'entité
+                .scale(size , size) // Définition de la taille de l'entité
+                .scaleOrigin(size , size) // Définition du point d'origine de la taille de l'entité
                 .build();
     }
 
     @Spawns("Map")
     public Entity newMap(SpawnData data){
         return FXGL.entityBuilder(data)
-                .type(EntityTypes.MAP)
-                //.view(new Rectangle(Main.WIDTH, Main.HEIGHT, Color.GREEN))
-                .view("maps/Carte2.png")
-
+                .type(EntityTypes.MAP) // Définition du type de l'entité
+                .view("maps/Carte2.png") // Définition de l'image de l'entité
                 .build();
     }
 
     @Spawns("Choice")
     public Entity newChoice(SpawnData data){
         return FXGL.entityBuilder(data)
-                .type(EntityTypes.CHOICE)
-                .view(new Circle(5, Color.RED))
-                .with(new PointData(data.getX(), data.getY()))
+                .type(EntityTypes.CHOICE) // Définition du type de l'entité
+                .view(new Circle(5, Color.RED)) // Définition de l'image de l'entité
+                .with(new PointData(data.getX(), data.getY())) // Définition des composants de l'entité
                 .build();
     }
 }

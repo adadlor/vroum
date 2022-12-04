@@ -26,42 +26,46 @@ public class Main extends GameApplication {
     public static final int HEIGHT = 800; // Hauteur de la fenêtre
     private static int LevelType = 0; // Type de niveau (1 = jeu, 2 = map creator)
 
-    private Circuit circuit;
+    private Circuit circuit; // Circuit
 
 
     public static void main(String[] args) {
         Tools.debug_print("Vroum Vroum");
-        launch(args);
+        launch(args); // Lancement du jeu dans l'environnement FXGL
     }
 
     @Override
+    /**
+     * Initialisation des paramètres du jeu
+     */
     protected void initSettings(GameSettings gameSettings) {
         Tools.debug_print("initSettings");
-        gameSettings.setWidth(WIDTH);
-        gameSettings.setHeight(HEIGHT);
-        gameSettings.setTitle("Vroum Vroum");
-        gameSettings.setVersion("SC 0.1");
-        gameSettings.setMainMenuEnabled(true);
-        gameSettings.setSceneFactory(new InterfaceImplement());
+        gameSettings.setWidth(WIDTH); // Largeur de la fenêtre
+        gameSettings.setHeight(HEIGHT); // Hauteur de la fenêtre
+        gameSettings.setTitle("Vroum Vroum"); // Titre de la fenêtre
+        gameSettings.setVersion("SC 0.1"); // Version du jeu
+        gameSettings.setMainMenuEnabled(true); // Affichage du menu principal
+        gameSettings.setSceneFactory(new InterfaceImplement()); // Ajout de la classe de gestion des interfaces
 
         /*
         Import CSS
          */
-        gameSettings.getCSSList().add("MapCreator.css");
+        gameSettings.getCSSList().add("MapCreator.css"); // Ajout du CSS du MapCreator
 
     }
 
     @Override
     protected void initGame() {
-        Tools.debug_print("initGame : LevelType = " + LevelType);
-        switch (LevelType) {
-            case 1:
-                new Game();
+        Tools.debug_print("initGame : LevelType = " + LevelType); // Affichage du type de niveau
+        switch (LevelType) { // Switch sur le type de niveau
+            case 1: // Si le niveau est un jeu
+                new Game(); // Instanciation de la classe Game
                 break;
-            case 2:
-                new MapCreator();
+            case 2: // Si le niveau est un MapCreator
+                new MapCreator(); // Instanciation de la classe MapCreator
                 break;
             default:
+                Tools.debug_print("initGame : LevelType non reconnu"); // Affichage d'un message d'erreur
                 Tools.error_print("initGame : LevelType = " + LevelType + " is not a valid LevelType");
                 break;
         }
@@ -69,6 +73,9 @@ public class Main extends GameApplication {
     }
 
     @Override
+    /**
+     * Initialisation des touches du jeu
+     */
     protected void initInput() {
         Tools.debug_print("initInput");
         onKeyDown(KeyCode.F, () -> getNotificationService().pushNotification("Hello World!")); // Affiche une notification
@@ -129,7 +136,7 @@ public class Main extends GameApplication {
     }
 
     public static void setLevelType(int levelType) {
-        LevelType = levelType;
+        LevelType = levelType; // Définition du type de niveau
     }
 
 

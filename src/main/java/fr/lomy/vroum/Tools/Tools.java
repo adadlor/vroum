@@ -1,5 +1,10 @@
 package fr.lomy.vroum.Tools;
 
+/**
+ * Classe de gestion des outils
+ * Elle contient les méthodes de calculs et de debug
+ */
+
 public class Tools {
 
     public static void debug_print(String message) {
