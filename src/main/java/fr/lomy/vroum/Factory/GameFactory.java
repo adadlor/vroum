@@ -6,6 +6,7 @@ import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.EntityFactory;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.Spawns;
+import com.almasb.fxgl.multiplayer.NetworkComponent;
 import fr.lomy.vroum.Componant.Car;
 import fr.lomy.vroum.Data.PointData;
 import fr.lomy.vroum.Enums.EntityTypes;
@@ -26,6 +27,7 @@ public class GameFactory implements EntityFactory {
                 .type(EntityTypes.CAR) // Définition du type de l'entité
                 .viewWithBBox("cars/pitstop_car_1.png") // Définition de l'image de l'entité
                 .with(new Car(data.getX(),data.getY(),Color.RED)) // Définition des composants de l'entité
+                .with(new NetworkComponent()) // Pour la synchronisation en réseau
                 .scale(size , size) // Définition de la taille de l'entité
                 .scaleOrigin(size , size) // Définition du point d'origine de la taille de l'entité
                 .build();
@@ -36,6 +38,7 @@ public class GameFactory implements EntityFactory {
         return FXGL.entityBuilder(data)
                 .type(EntityTypes.MAP) // Définition du type de l'entité
                 .view("maps/Carte2.png") // Définition de l'image de l'entité
+                .with(new NetworkComponent()) // Pour la synchronisation en réseau
                 .build();
     }
 

@@ -3,7 +3,9 @@ package fr.lomy.vroum.Componant;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.component.Component;
+import com.almasb.fxgl.multiplayer.MultiplayerService;
 import fr.lomy.vroum.Data.PointData;
+import fr.lomy.vroum.Main;
 import fr.lomy.vroum.Tools.Tools;
 import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
@@ -49,6 +51,7 @@ public class Car extends Component {
                 var y = (this.yCenter + j * 50)+speedVector.get(1) *50; // coordonnée y du point
                 Tools.debug_print("Add action x: " + x + " y: " + y);
                 var point = FXGL.spawn("Choice", x, y); // spawn du point
+                FXGL.getService(MultiplayerService.class).spawn(Main.getConnection(),point,"Choice"); // spawn du point en réseau
                 point.getComponent(PointData.class).setSpeed(i, j); // set de la vitesse du point
                 actions.add(point); // ajout du point dans la liste des points
 

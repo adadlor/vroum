@@ -53,7 +53,7 @@
                     <jlinkImageName>mygame</jlinkImageName>
                     <jlinkZipName>mygame</jlinkZipName>
                     <mainClass>fr.lomy.vroum.Main</mainClass>
-                    <executable>C:\Users\iMax\.jdks\openjdk-19.0.1\bin\java</executable>
+                    <executable>/home/imax/.jdks/openjdk-19.0.1/bin/java</executable>
                 </configuration>
             </plugin>
         </plugins>

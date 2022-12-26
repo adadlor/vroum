@@ -1,8 +1,10 @@
 package fr.lomy.vroum;
 
+import com.almasb.fxgl.core.serialization.Bundle;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
-import com.almasb.fxgl.entity.component.Component;
+import com.almasb.fxgl.multiplayer.MultiplayerService;
+import com.almasb.fxgl.net.Connection;
 import fr.lomy.vroum.Componant.Car;
 import fr.lomy.vroum.Data.PointData;
 import fr.lomy.vroum.Factory.GameFactory;
@@ -13,19 +15,17 @@ import java.util.ArrayList;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
 
-/*
-Classe qui gère le jeu
- */
-
-public class Game {
-
+public class Server {
     private ArrayList<Entity> cars = new ArrayList<>(); // Liste des entités voiture
     private Integer whoIsPlaying = 0; // Qui joue
-    public Game() {
+    public Server(Connection<Bundle> connection) {
         getGameWorld().addEntityFactory(new GameFactory()); // Ajout de la factory (pour les entités du jeu) dans le monde du jeu
-        spawn("Map", 0, 0); // Spawn de la map (carte en arrière plan)
+        var map = spawn("Map", 0, 0); // Spawn de la map (carte en arrière plan)
+        getService(MultiplayerService.class).spawn(connection,map,"Map"); // Ajout de la map dans le monde du jeu (Coté serveur)
         Entity car1 = spawn("Car", 100, 100);  // Spawn de la voiture 1
         Entity car2 = spawn("Car", 200, 200); // Spawn de la voiture 2
+        getService(MultiplayerService.class).spawn(connection,car1,"Car"); // Ajout de la voiture 1 dans le monde du jeu (Coté serveur)
+        getService(MultiplayerService.class).spawn(connection,car2,"Car"); // Ajout de la voiture 2 dans le monde du jeu (Coté serveur)
         cars.add(car1); // Ajout de la voiture 1 dans la liste des voitures
         cars.add(car2); // Ajout de la voiture 2 dans la liste des voitures
 
