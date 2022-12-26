@@ -1,10 +1,8 @@
 package fr.lomy.vroum.Interface;
 
-import com.almasb.fxgl.dsl.FXGL;
-import fr.lomy.vroum.Componant.StartPoint;
+import fr.lomy.vroum.Component.StartPoint;
 import fr.lomy.vroum.Main;
 import fr.lomy.vroum.MapCreator;
-import fr.lomy.vroum.Tools.Tools;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.paint.Color;

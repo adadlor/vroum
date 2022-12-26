@@ -2,28 +2,15 @@ package fr.lomy.vroum;
 
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
-import com.almasb.fxgl.core.math.FXGLMath;
 import com.almasb.fxgl.core.serialization.Bundle;
-import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.multiplayer.MultiplayerService;
 import com.almasb.fxgl.net.Connection;
-import fr.lomy.vroum.Componant.Circuit;
-import fr.lomy.vroum.Componant.StartPoint;
+import fr.lomy.vroum.Component.Circuit;
 import fr.lomy.vroum.Factory.GameFactory;
-import fr.lomy.vroum.Factory.MapCreatorFactory;
 import fr.lomy.vroum.Interface.InterfaceImplement;
-import fr.lomy.vroum.Interface.MapCreatorInterface;
 import fr.lomy.vroum.Tools.Tools;
-import javafx.geometry.Point2D;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseButton;
-import javafx.scene.layout.VBox;
 import javafx.util.Duration;
-
-import java.util.ArrayList;
-import java.util.function.Consumer;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
 
