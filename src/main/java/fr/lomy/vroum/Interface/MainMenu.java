@@ -55,15 +55,9 @@ public class MainMenu extends FXGLMenu {
             getGameController().startNewGame();
         });
 
-        button("Join Game", () -> {
-            System.out.println("Join Game");
-            Main.setLevelType(2);
-            getGameController().startNewGame();
-        });
-
         button("Map Creator", () -> {
             System.out.println("Map Creator");
-            Main.setLevelType(3);
+            Main.setLevelType(2);
             getGameController().startNewGame();
         });
 

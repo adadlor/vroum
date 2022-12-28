@@ -52,11 +52,11 @@ public class Game {
                     cpSpeed = cpSpeed.add(entitySpeed); // Ajout du vecteur de vitesse de l'entité "Choice" au vecteur de vitesse de la voiture
                     System.out.println(cpSpeed);// Déplacement de la voiture avec le nouveau vecteur de vitesse
                     car.getComponent(Car.class).move(cpSpeed);
+                    whoIsPlaying = whoIsPlaying+1 >= cars.size()  ? 0 : whoIsPlaying+1; // Changement de la voiture qui joue
                 }
             }
 
 
-            Tools.error_print("CP : OSCOUR");
 
         });
 

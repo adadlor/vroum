@@ -26,22 +26,4 @@ public class Tools {
     public static void info_print(String message) {
         System.out.println("[INFO] " + message);
     }
-
-    public static boolean ipIsValid(String anwser) {
-        String[] ip = anwser.split("\\.");
-        if(ip.length != 4){
-            return false;
-        }
-        for(String s : ip){
-            try{
-                int i = Integer.parseInt(s);
-                if(i < 0 || i > 255){
-                    return false;
-                }
-            }catch (NumberFormatException e){
-                return false;
-            }
-        }
-        return true;
-    }
 }
