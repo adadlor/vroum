@@ -10,6 +10,11 @@ Fonctionne avec Maven & Java 19
 Vous pouvez utiliser intellij pour lancer le projet. 
 Tout se configure automatiquement.
 
+### Installation
+Lancer la commande Maven pour installer les paquets
+- /home/{user}/download/Vroum/ ~ java install
+Puis la commande pour lancer le jeu
+- /home/{user}/download/Vroum/ ~ java javafx:run
 
 ## But du jeu 
 Imaginez une course de voiture électique en usant de statégie pour parvenir en premier à la ligne de départ ! Comprenez et apprennez sur le développement durable en répondant au questions et débloquez de nouvelles voitures stylées.
