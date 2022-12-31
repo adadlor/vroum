@@ -1,4 +1,4 @@
-package fr.lomy.vroum.Componant;
+package fr.lomy.vroum.Component;
 
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;

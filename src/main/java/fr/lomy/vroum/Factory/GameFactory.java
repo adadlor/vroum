@@ -6,14 +6,13 @@ import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.EntityFactory;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.Spawns;
-import fr.lomy.vroum.Componant.Car;
+import com.almasb.fxgl.multiplayer.NetworkComponent;
+import fr.lomy.vroum.Component.Car;
 import fr.lomy.vroum.Data.PointData;
 import fr.lomy.vroum.Enums.EntityTypes;
-import fr.lomy.vroum.Main;
 import fr.lomy.vroum.Tools.Tools;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 
 public class GameFactory implements EntityFactory {
 
@@ -44,7 +43,7 @@ public class GameFactory implements EntityFactory {
         return FXGL.entityBuilder(data)
                 .type(EntityTypes.CHOICE) // Définition du type de l'entité
                 .view(new Circle(5, Color.RED)) // Définition de l'image de l'entité
-                .with(new PointData(data.getX(), data.getY())) // Définition des composants de l'entité
+                .with(new PointData()) // Définition des composants de l'entité
                 .build();
     }
 }

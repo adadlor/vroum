@@ -7,10 +7,19 @@ import com.almasb.fxgl.app.scene.MenuType;
 import com.almasb.fxgl.core.util.EmptyRunnable;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.ui.FontType;
+import fr.lomy.vroum.Game;
 import fr.lomy.vroum.Main;
+import fr.lomy.vroum.MapCreator;
+import fr.lomy.vroum.Rules;
 import javafx.beans.binding.Bindings;
-import javafx.geometry.Point2D;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.scene.control.Separator;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -22,110 +31,116 @@ import javafx.util.Duration;
 import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class MainMenu extends FXGLMenu {
+    private static ObjectProperty<MenuButton> selectedButton; // Pour changer la description du bouton
+    public MainMenu() {
+        super(MenuType.MAIN_MENU); //récupération des construteurs et autre du FXGLMenu ( du main menu )
 
-    private static final int BUTTON_SIZE = 30;
+        // Mise en place du background
+        getContentRoot().getChildren().addAll(FXGL.texture("Menu_Route.jpeg",getAppWidth(), getAppHeight()));
 
-    /**
-     * Variable qui permet de connaitre le nombre de bouton
-     * Va servir pour la position des boutons
-     */
-    private int BUTTON_NUM = 0;
-
-    public MainMenu(MenuType type) {
-        super(type);
-
-        //Background
-        var background = getAssetLoader().loadTexture("mainmenu.png"); // Charge la texture du background
-        background.setTranslateX(0); // Position X
-        background.setTranslateY(0); // Position Y
-        // position 0 0 correspond au coin en haut à gauche de l'écran
-        background.setFitWidth(FXGL.getAppWidth()); // Taille X
-        background.setFitHeight(FXGL.getAppHeight()); // Taille Y
-        getContentRoot().getChildren().add(background); // Ajoute le background à la fenêtre
-
-        //Title
-        var title = getUIFactoryService().newText("Vroum", Color.WHITE, FontType.GAME, 50.0); // Création du titre
-        title.setTranslateX((Main.WIDTH / 8)); // Position X
-        title.setTranslateY((Main.HEIGHT / 3)); // Position Y
-        getContentRoot().getChildren().add(title); // Ajoute le titre à la fenêtre
-
-        button("New Game", () -> {
-            System.out.println("New Game");
-            Main.setLevelType(1);
-            getGameController().startNewGame();
-        });
-
-        button("Map Creator", () -> {
-            System.out.println("Map Creator");
-            Main.setLevelType(2);
-            getGameController().startNewGame();
-        });
-
-        button("Exit", () -> {
-            System.out.println("Exit");
-            FXGL.getGameController().exit(); // Ferme le jeu
-        });
-    }
-
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-    }
-
-    @Override
-    protected void onUpdate(double tpf) {
-        super.onUpdate(tpf);
-    }
-
-    private void button(String name, Runnable action) {
-
-
-        /*
-        Creation du bouton
-         */
-        var button = getUIFactoryService().newButton(name);
-
-        /*
-        Creation du rectangle qui montre la selection
-         */
-        var boxSelect = new Rectangle(0, 0, 10, BUTTON_SIZE);
-
-        button.setPrefSize(name.length()*20, BUTTON_SIZE); // Reglage de la taille du bouton
-
-        boxSelect.setFill(Color.WHITE); // Couleur du rectangle
-
-
-        boxSelect.setTranslateX((Main.WIDTH / 8) - 10); // Position X du rectangle
-        boxSelect.setTranslateY((Main.HEIGHT / 2.7) + (BUTTON_NUM * 50)); // Position Y du rectangle
-        button.setTranslateX((Main.WIDTH / 8)); // Position X du bouton
-        button.setTranslateY((Main.HEIGHT / 2.7) + (BUTTON_NUM * 50)); // Position Y du bouton
-
-        button.alignmentProperty().setValue(Pos.CENTER_LEFT); // Alignement du texte du bouton
-
-        /*
-         Style du bouton en CSS
-         */
-        var style = "-fx-text-fill: #ffffff; " + // Couleur du texte
-                "-fx-font-size: 12px; " + // Taille du texte
-                "-fx-font-family: \"Roboto\"; " + // Police du texte
-                "-fx-background-color: rgba(0,0,0,0);" + // Couleur du bouton
-                "-fx-padding: 0 0 0 10px; "; // Marge du texte
-        button.setStyle(style); // Application du style
-
-        button.setOnAction(e -> action.run()); // Action du bouton
-        button.hoverProperty().addListener((observable, oldValue, newValue) -> { // Si la souris est sur le bouton
-            if (newValue) {
-                button.setStyle(style); // Application du style pour eviter d'avoir les propiétés du bouton par defaut
-                getContentRoot().getChildren().add(boxSelect); // Ajout du rectangle de selection
+        // Mise en place des boutons et de leurs actions
+        MenuButton btnPlay = new MenuButton("Play game","Start New game", ()-> {
+            fireNewGame();
+            if (Main.game == null) {
+                Main.mapCreator = null;
+                Main.game = new Game();
             } else {
-                button.setStyle(style); // Application du style pour eviter d'avoir les propiétés du bouton par defaut
-                getContentRoot().getChildren().remove(boxSelect); // Suppression du rectangle de selection
+                Main.game.reset();
             }
         });
+        MenuButton btnCreate = new MenuButton("Map Creator","Create a new map", ()->{
+            fireNewGame();
+            if (Main.mapCreator == null) {
+                Main.game = null;
+                Main.mapCreator = new MapCreator();
+            } else {
+                Main.mapCreator.reset();
+            }
+        });
+        MenuButton btnRules = new MenuButton("Rules","Rules",Rules::new);
+        MenuButton btnExit = new MenuButton("Exit","Quit the game", this::fireExit);
 
-        getContentRoot().getChildren().add(button); // Ajout du bouton
-        BUTTON_NUM++; // Incrémentation du nombre de bouton
+        selectedButton = new SimpleObjectProperty<>(btnPlay); // crée le texte de la variable bouton play
+
+        var textDescription = FXGL.getUIFactoryService().newText("", Color.LIGHTGREY, 25);
+        textDescription.textProperty().bind(
+                Bindings.createStringBinding(() -> selectedButton.get().description, selectedButton)//Met la description
+        );
+
+        //Les mettres dans une box
+        var box = new VBox(15,//Taille entre les boxs
+                FXGL.getUIFactoryService().newText("VROOM",Color.WHITE,FontType.GAME, 100.0),
+                btnPlay,
+                btnCreate,
+                btnRules,
+                btnExit,
+                new Separator(Orientation.HORIZONTAL),
+                textDescription);
+
+        //Placer la box sur la fenêtre
+        box.setTranslateX(120);
+        box.setTranslateY(300);
+        //Y rajouter tout les boutons
+        getContentRoot().getChildren().addAll(box);
     }
 
+    // Création d'une classe pour créer des boutons
+    private static class MenuButton extends StackPane {
+        private final String name;
+        private final String description;
+        private final Runnable action;
+        private final Text text;
+        private final Rectangle selector;
+        private final Rectangle selector2;
+
+        private static final Color Couleur_Choisi_Clavier = Color.WHITE;
+        private static final Color Couleur_NON_Choisi_Clavier = Color.GREY;
+
+        public MenuButton (String name, String description, Runnable action){
+            this.name = name;
+            this.description = description;
+            this.action = action;
+
+            //Mise en place du texte dans le bouton:
+            text = FXGL.getUIFactoryService().newText(name, Color.WHITE, FontType.TEXT, 30.0); // création du texte
+
+            // Faire le changement de couleur du focus (Clavier)
+            text.fillProperty().bind(
+                    Bindings.when(focusedProperty()).then(Couleur_Choisi_Clavier).otherwise(Couleur_NON_Choisi_Clavier)
+            );
+
+            //Mise en place du rectangle selecteur Clavier:
+            selector = new Rectangle(7,17, Color.WHITE);
+            selector.setTranslateX(-25);
+            selector.setTranslateY(-2);
+            selector.visibleProperty().bind(focusedProperty());//Change la visibilité en focus clavier
+
+            focusedProperty().addListener((observable, oldvalue, isSelected)-> { //Quand le focus change
+                if (isSelected){ //Si quelque chose est selectionné
+                    selectedButton.setValue(this); //Changer la description
+                }
+            });
+
+            //Mise en place du rectangle selecteur Souris:
+            selector2 = new Rectangle(350,30, Color.WHITE);
+            selector2.setOpacity(0.30);
+            selector2.setTranslateX(-25);
+            selector2.visibleProperty().bind(hoverProperty());//Change la visibilité avec la souris
+
+
+            setAlignment(Pos.CENTER_LEFT); // Alignement à gauche
+            setFocusTraversable(true);//Fait en sorte que le focus fonctionne
+
+            setOnKeyPressed(e->{ //Lorsqu'une touche est pressé :
+                if(e.getCode() == KeyCode.ENTER) { //Si c'est entrer :
+                    this.action.run(); //Faire l'action associé
+                }
+            });
+            //Lorsqu'on clique :
+            setOnMouseClicked(e->{ this.action.run(); }); //Faire l'action associé
+
+
+            getChildren().addAll(text, selector, selector2); // Ajouter les elements
+        }
+    }
 }

@@ -1,6 +1,6 @@
 package fr.lomy.vroum.Interface.MapCreator;
 
-import fr.lomy.vroum.Componant.Road;
+import fr.lomy.vroum.Component.Road;
 import javafx.scene.layout.HBox;
 
 import java.util.List;

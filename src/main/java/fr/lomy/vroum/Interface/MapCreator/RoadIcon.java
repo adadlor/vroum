@@ -2,7 +2,7 @@ package fr.lomy.vroum.Interface.MapCreator;
 
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.texture.Texture;
-import fr.lomy.vroum.Componant.Road;
+import fr.lomy.vroum.Component.Road;
 import javafx.geometry.Pos;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;

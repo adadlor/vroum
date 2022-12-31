@@ -1,4 +1,4 @@
-package fr.lomy.vroum.Componant;
+package fr.lomy.vroum.Component;
 
 public class Player {
     private String name;
