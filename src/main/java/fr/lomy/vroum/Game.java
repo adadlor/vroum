@@ -96,8 +96,8 @@ public class Game {
         getGameWorld().addEntityFactory(new GameFactory());
 
         spawn("Map", 0, 0);
-        cars.add(spawn("Car", 100, 100));
-        cars.add(spawn("Car", 200, 200));
+        cars.add(spawn("Car", 820, 390));
+        cars.add(spawn("Car", 850, 390));
 
     }
 }
