@@ -38,8 +38,8 @@ public class Game {
 
         getGameWorld().addEntityFactory(new GameFactory()); // Ajout de la factory (pour les entités du jeu) dans le monde du jeu
         spawn("Map", 0, 0); // Spawn de la map (carte en arrière plan)
-        Entity car1 = spawn("Car", 100, 100);  // Spawn de la voiture 1
-        Entity car2 = spawn("Car", 200, 200); // Spawn de la voiture 2
+        Entity car1 = spawn("Car", 820, 390);  // Spawn de la voiture 1
+        Entity car2 = spawn("Car", 850, 390); // Spawn de la voiture 2
         cars.add(car1); // Ajout de la voiture 1 dans la liste des voitures
         cars.add(car2); // Ajout de la voiture 2 dans la liste des voitures
         carsMovesNumber.put(car1, 0); // Ajout de la voiture 1 dans la liste des voitures et du nombre de mouvement qu'elle a effectué
